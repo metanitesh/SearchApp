@@ -5,16 +5,16 @@ import ProductList from "./components/productList";
 import ProductImages from "./components/productImages";
 import { useQuery } from "react-query";
 import useProductSearchQuery from "./queries/useProductSearch";
+import { useStore } from "./store";
 
 function App() {
-  const [fetchSearch, setFetchSearch] = useState("");
   const [productImage, setProductImage] = useState<string[]>();
-
+  const { searchQuery, setSearchQuery } = useStore();
   const {
     data: ProductSearchResult,
     isLoading,
     error,
-  } = useProductSearchQuery(fetchSearch);
+  } = useProductSearchQuery(searchQuery);
 
   if (isLoading) {
     return <>Loading...</>;
@@ -22,7 +22,7 @@ function App() {
   return (
     <>
       <h1>App</h1>
-      <Search setFetchSearch={setFetchSearch} />
+      <Search />
       {ProductSearchResult?.products && (
         <ProductList
           products={ProductSearchResult.products}

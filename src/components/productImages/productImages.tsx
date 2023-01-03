@@ -6,7 +6,7 @@ type ProductImagesProps = {
 
 export default function ProductImages({ productImages }: ProductImagesProps) {
   const ui = productImages.map((img) => {
-    return <img src={img}></img>;
+    return <img key={img} src={img}></img>;
   });
   return <>{ui}</>;
 }

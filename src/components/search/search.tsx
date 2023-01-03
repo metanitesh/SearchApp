@@ -1,15 +1,17 @@
 import React, { useState } from "react";
+import { useStore } from "../../store";
 
 type searchProps = {
   setFetchSearch: (search: string) => void;
 };
 
-export default function Search({ setFetchSearch }: searchProps) {
+export default function Search() {
+  const { setSearchQuery } = useStore();
   const [search, setSearch] = useState("");
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFetchSearch(search);
+    setSearchQuery(search);
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
